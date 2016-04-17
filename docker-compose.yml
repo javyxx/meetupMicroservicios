@@ -1,0 +1,16 @@
+rabbitmq:
+  image: rabbitmq:3.5.3
+  container_name: rabbitmq
+  ports:
+    - "5672:5672"
+    - "15672:15672"
+  expose:
+    - "5672"
+mongodb:
+  image: mongo:2.6.11
+  container_name: mongodb
+  ports:
+    - "27017:27017"
+  expose:
+    - "27017"
+  command: bash -c  " set -o monitor ; wget https://raw.githubusercontent.com/jledo/PostMicroservices/master/initData.js ; mongod --smallfiles & sleep 6; mongo localhost:27017/arquitecture initData.js; fg" 
